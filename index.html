@@ -4,157 +4,56 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<title>Project</title>
+	<title>Caça-Palavras</title>
 
-	<style>
-		/**
-		* Wordfind.js 0.0.1
-		* (c) 2012 Bill, BunKat LLC.
-		* Wordfind is freely distributable under the MIT license.
-		* For all details and documentation:
-		*     https://github.com/bunkat/wordfind
-		*/
-		body {
-			background: #bcd8e7;
-		}
-
-		.puzzleWrap {
-			width: 800px;
-			margin: 50px auto 0;
-			display: flex;
-			justify-content: space-between;
-		}
-
-		p {
-			font: 22pt sans-serif;
-			margin: 20px 20px 0px 30px;
-			color: #1c2f3b;
-		}
-
-		/**
-		* Styles for the puzzle
-		*/
-		#puzzle {
-			padding: 5px;
-			margin: 0;
-			width: auto;
-			border: solid 1px black;
-		}
-
-		#puzzle div {
-			width: 100%;
-			margin: 0 auto;
-		}
-
-		/* style for each square in the puzzle */
-		#puzzle .puzzleSquare {
-			height: 30px;
-			width: 30px;
-			text-transform: uppercase;
-			background-color: transparent;
-			border: 0;
-			outline: none;
-			font: 1em sans-serif;
-			color: #1c2f3b;
-		}
-
-		button::-moz-focus-inner {
-			border: none;
-			outline: none;
-		}
-
-		/* indicates when a square has been selected */
-		#puzzle .selected {
-			color: #FFF;
-			background-color: rgb(111, 111, 224);
-			outline: none;
-		}
-
-		#puzzle .selected:focus {
-			border: none;
-		}
-
-		/* indicates that the square is part of a word that has been found */
-		#puzzle .found {
-			color: #FFF;
-			background-color: rgb(122, 206, 122);
-		}
-
-		#puzzle .solved {
-			color: #ee5426;
-		}
-
-		/* indicates that all words have been found */
-		#puzzle .complete {
-			background-color: green;
-		}
-
-		/**
-		* Styles for the word list
-		*/
-		#words {
-			width: 300px;
-			color: #1c2f3b;
-			text-transform: uppercase;
-			display: flex;
-			align-items: center;
-			background: #a8c6d8;
-		}
-
-		#words ul {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		}
-
-		#words li {
-			padding: 0 0 12px;
-			font: 1em sans-serif;
-			display: inline-block;
-			text-align: center;
-			width: 150px;
-		}
-
-		/* indicates that the word has been found */
-		#words .wordFound {
-			text-decoration: line-through;
-			color: #8ab881;
-			/* opacity: .3; */
-		}
-
-		/**
-		* Styles for the button
-		*/
-		#solve {
-			margin: 30px 30px 0 40px;
-			background: transparent;
-			color: #ee5426;
-			padding: 10px 20px;
-			border: 2px solid #ee5426;
-			border-radius: 25px;
-			opacity: 0.5;
-			transition: opacity 0.25s ease-in;
-		}
-
-		#solve:hover,
-		#solve.gameSolved {
-			opacity: 1;
-		}
-	</style>
+	<!-- layout -->
+	<link href="assets/css/style.min.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 
 	<div class="puzzleWrap">
-		<div id='puzzle'></div>
-		<div id='words'>
+		<div id='puzzle' class="puzzleBoard"></div>
+		<div id='words' class="puzzleWords">
 			<!-- <button id='solve'>Solve Puzzle</button> -->
 		</div>
-
+		<div id='image' class="puzzleImage">
+			<img src="images/img_1.png" />
+		</div>
 	</div>
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-	<script src="wordsearch.min.js"></script>
+	<script src="assets/js/wordsearch.min.js"></script>
+	<script>
+		$(function () {
+			// var words = ['save', 'earn', 'invest', 'retirement', 'account', 'money', 'credit', 'debt', 'assets', 'loan', 'interest', 'accrual',
+			// 	'economy', 'sharing', 'savings', 'budget', 'capital', 'collateral', 'bond', 'market', 'value', 'index'];
+
+			var words = ['starty', 'lucas', 'edilaine', 'carrefour', 'canada', 'rodrigo', 'javascript', 'html', 'resort'];
+
+			// start a word find game
+			var gamePuzzle = wordfindgame.create(
+				words,
+				'.puzzleBoard',
+				'.puzzleWords',
+				{
+					height: 15,
+					width: 15,
+					fillBlanks: true
+				});
+
+			// $('#solve').click(function () {
+			// 	wordfindgame.solve(gamePuzzle, words);
+			// });
+
+			// create just a puzzle, without filling in the blanks and print to console
+			// var puzzle = wordfind.newPuzzle(
+			// 	words,
+			// 	{ height: 5, width: 15, fillBlanks: true }
+			// );
+			// wordfind.print(puzzle);
+		});
+	</script>
 </body>
 
 </html>

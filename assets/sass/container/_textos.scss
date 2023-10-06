@@ -1,0 +1,154 @@
+h1,
+h2,
+h3,
+h4 {
+  display: block;
+  font-family: $fonte;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #fff;
+  font-size: 42px;
+  font-weight: 700;
+  position: relative;
+  text-align: left;
+}
+
+h2 {
+  color: #0db14b;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 20px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+h3 {
+  color: transparent;
+  display: inline-block;
+  font-family: $fonte;
+  font-size: 52px;
+  margin: 0 auto 40px;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+
+  left: 50%;
+  @include transform(translateX(-50%));
+}
+
+h4 {
+  color: $cor2;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 15px;
+  position: relative;
+  text-transform: inherit;
+}
+
+h5 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+h6 {
+  font-family: $fonte;
+  font-size: 18px;
+  font-weight: 400;
+  color: #4d5290;
+  letter-spacing: 1px;
+}
+
+p {
+  color: #fff;
+  display: block;
+  font-family: $fonte;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0 0 30px;
+  padding: 0;
+}
+
+strong {
+  color: $cor3;
+  font-weight: 700;
+}
+
+a {
+  color: #009ea5;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+ul {
+  margin: 0 0 20px;
+  padding: 0 0 0 15px;
+
+  li {
+    color: $cor4;
+    font-family: $fonte;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    list-style: none;
+    margin: 5px 0;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+
+    &::before {
+      color: $cor4;
+      content: "\2022";
+      display: block;
+      font-size: 24px;
+      line-height: 1.2;
+      position: absolute;
+      top: 0;
+      left: -15px;
+    }
+  }
+}
+
+ol {
+  counter-reset: foo;
+  list-style-type: none;
+  margin: 0 0 30px;
+  padding: 0;
+
+  li {
+    color: #58595b;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 0 5px;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+
+    &::before {
+      counter-increment: foo;
+      color: #008b91;
+      content: counter(foo) ")";
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding-right: 5px;
+      text-align: right;
+    }
+  }
+}
+
+@media #{$bp-phone} {
+  p {
+    font-size: 16px;
+  }
+}
