@@ -1,17 +1,53 @@
+.logoEinstein {
+  background: url("../images/logoSirio.svg") center no-repeat;
+  height: 45px;
+  width: 45px;
+  position: absolute;
+  top: 5%;
+  left: 3%;
+}
+
+.logoPuzzle {
+  background: url("../images/logoPrincipal.svg") center no-repeat;
+  height: 85px;
+  width: 310px;
+  position: absolute;
+  top: 0;
+  left: 18%;
+
+  @media #{$bp-ultrabook} {
+    left: 11%;
+  }
+}
+
+.gameContent {
+  background: url("../images/BG_Principal.png") bottom -80px center no-repeat;
+  // background-size: 100%;
+  display: flex;
+  height: 100%;
+
+  @media #{$bp-ultrabook} {
+    background-position: bottom -200px center;
+  }
+}
+
 .puzzleWrap {
-  width: 90vw;
+  width: 1260px;
   height: 100%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 
-  @media #{$bp-minDesktop} {
-    display: grid;
-    grid-template-areas:
-      "puzzle palavras"
-      "puzzle imagens";
-    grid-template-columns: 465px auto;
+  @media #{$bp-ultrabook} {
+    width: 1140px;
+    height: calc(100% - 120px);
+    padding-top: 120px;
+    // display: grid;
+    // grid-template-areas:
+    //   "puzzle palavras"
+    //   "puzzle imagens";
+    // grid-template-columns: 465px auto;
   }
 }
 
@@ -19,7 +55,7 @@
 * Styles for the puzzle
 */
 .puzzleBoard {
-  border: solid 1px black;
+  // border: solid 1px black;
   grid-area: puzzle;
   margin: 0;
   padding: 5px;
@@ -30,14 +66,19 @@
     margin: 0 auto;
 
     .puzzleSquare {
+      background-color: #fff;
+      border: solid 1px $cor2;
+      border-radius: 2.5px;
+      color: $cor1;
+      font-family: $fonte;
+      font-size: 1em;
+      font-weight: 700;
       height: 30px;
       width: 30px;
-      text-transform: uppercase;
-      background-color: transparent;
-      border: 0;
       outline: none;
-      font: 1em sans-serif;
-      color: $cor2;
+      text-transform: uppercase;
+
+      @include transition(all 0.4s);
 
       &::-moz-focus-inner {
         border: none;
@@ -48,15 +89,11 @@
         background-color: $cor5;
         color: #fff;
         outline: none;
-
-        &:focus {
-          border: none;
-        }
       }
 
       &.found {
         color: #fff;
-        background-color: $cor4;
+        background-color: $cor5;
 
         &.selected {
           background-color: $cor5;
@@ -64,11 +101,32 @@
       }
 
       &.complete {
-        background-color: lighten($cor4, 15%);
+        background-color: lighten($cor5, 18%);
+        pointer-events: none;
 
         &.found {
-          background-color: $cor4;
+          background-color: $cor5;
         }
+      }
+
+      &:first-child {
+        border-left: solid 2px $cor2;
+      }
+
+      &:last-child {
+        border-right: solid 2px $cor2;
+      }
+    }
+
+    &:first-child {
+      .puzzleSquare {
+        border-top: solid 2px $cor2;
+      }
+    }
+
+    &:last-child {
+      .puzzleSquare {
+        border-bottom: solid 2px $cor2;
       }
     }
   }
@@ -76,33 +134,39 @@
 
 // LISTA DAS PALAVRAS
 .puzzleWords {
-  background: darken($cor1, 5%);
+  // background: darken($cor1, 5%);
   color: $cor2;
   grid-area: palavras;
   display: flex;
   align-items: center;
   padding: 15px 0;
   text-transform: uppercase;
-  width: 450px;
+  width: 300px;
 
-  @media #{$bp-minDesktop} {
-    align-self: end;
-  }
+  @include transition(all 0.3s);
+
+  // @media #{$bp-minDesktop} {
+  //   align-self: end;
+  // }
 
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    // display: grid;
+    // grid-template-columns: repeat(3, 1fr);
     width: 100%;
 
     li {
-      color: $cor2;
+      background-color: #fff;
+      border: solid 1px $cor5;
+      border-radius: 35px;
+      color: $cor4;
       font-family: $fonte;
       font-size: 1em;
-      margin: 0;
-      padding: 0.5em 0;
+      font-weight: 700;
+      margin: 0 0 15px;
+      padding: 1em 0;
       text-align: center;
 
       &::before {
@@ -112,16 +176,19 @@
   }
 
   .wordFound {
-    text-decoration: line-through;
-    color: darken($cor4, 5%);
+    background: $cor5 url("../images/icoCheck.svg") center left 6px no-repeat;
+    background-size: auto 85%;
+    color: #fff;
   }
 }
 
 // IMAGENS LATERAIS
 .puzzleImage {
-  background-color: rgba(#fff, 0.2);
+  background: url("../images/BG_Personagens.png") bottom center no-repeat;
   grid-area: imagens;
-  width: 350px;
+  height: 435px;
+  width: 300px;
+  margin: 0 0 5em 0;
 
   @media #{$bp-minDesktop} {
     align-self: start;
