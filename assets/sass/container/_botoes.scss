@@ -1,0 +1,84 @@
+.botaoPadrao {
+  background: #fff;
+  border-radius: 40px;
+  color: $cor4;
+  cursor: pointer;
+  display: block;
+  font-family: $fonte;
+  font-size: 1.5em;
+  font-weight: 900;
+  padding: 20px 50px;
+  line-height: 1;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+  position: relative;
+  text-transform: uppercase;
+
+  @include transition(all 0.4s);
+
+  &:hover {
+    background: darken($color: #fff, $amount: 5%);
+    color: darken($cor4, 10%);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &[disabled],
+  &[disabled]:hover {
+    background: #aaa;
+    color: #777;
+    opacity: 1;
+  }
+
+  &.btnTranscricao {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 239.24 79' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cstyle%3E.a%7Bisolation:isolate;%7D.b%7Bfill:%23021926;mix-blend-mode:multiply;opacity:0.4;%7D.c%7Bopacity:0.5;%7D.d,.e%7Bfill:%232bf9f9;%7D.d%7Bstroke:%232bf9f9;stroke-miterlimit:10;stroke-width:0.48px;%7D%3C/style%3E%3C/defs%3E%3Cg class='a'%3E%3Cpolygon class='b' points='223.34 79 239.24 63.1 239.24 15.9 223.34 0 16.14 0 0.24 15.9 0.24 63.1 16.14 79 223.34 79'/%3E%3Cg class='c'%3E%3Cpath class='d' d='M237.24,76.87H48l-3-2H.24V2.19H169.82L174.08,5h63.16Zm-189-.34h188.5V5.31H173.86L169.6,2.53H.76v72H45.2Z'/%3E%3Cpath class='e' d='M72,79V73.45h4.15V79Zm9.33,0V73.45h4.14V79Zm9.33,0V73.45h4.14V79Z'/%3E%3Crect class='e' x='64.75' y='73.45' width='2.08' height='5.55'/%3E%3Crect class='e' x='234.99' y='15.44' width='4.25' height='33.68'/%3E%3Crect class='e' x='234.99' y='53.85' width='4.25' height='2.75'/%3E%3Crect class='e' x='234.99' y='58.12' width='4.25' height='2.75'/%3E%3Cpath class='e' d='M16.28,0H67.66l4,5.39H16.28ZM14.7,0H12.4V5.39h2.3ZM9.58,0H7.11V5.39H9.58Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    height: 60px;
+    width: 195px;
+
+    color: $cor2;
+
+    &:hover {
+      color: darken($color: $cor2, $amount: 10%);
+    }
+  }
+
+  @media #{$bp-phone} {
+    font-size: 24px;
+    border-radius: 28px;
+    padding: 12px 30px 6px;
+  }
+}
+
+.pulsar {
+  @include animation(pulse 1.5s ease infinite);
+}
+@include keyframes(pulse) {
+  0% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1);
+  }
+  85% {
+    transform: scale(0.9);
+  }
+  90% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
