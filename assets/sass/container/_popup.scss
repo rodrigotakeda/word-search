@@ -1,0 +1,270 @@
+/************************************
+MODAL
+***********************************/
+#modalWord {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  @include transform(scale(0));
+
+  &.aparece {
+    transform: scale(1);
+
+    .modal-background {
+      background: rgba($cor1, 0);
+      @include animation(
+        fadeInColor 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+      );
+    }
+
+    .modal {
+      opacity: 0;
+      @include animation(
+        scaleUpCenter 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+      );
+    }
+
+    &.out {
+      .modal-background {
+        @include animation(
+          fadeOutColor 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+        );
+      }
+
+      .modal {
+        @include animation(
+          scaleDownCenter 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+        );
+      }
+    }
+  }
+
+  &.apareceLado {
+    transform: scale(1);
+
+    .modal-background {
+      background: rgba($cor1, 0);
+      animation: fadeInColor 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+    .modal {
+      transform: translateX(150%);
+      animation: roadRunnerIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    &.out {
+      //animation: quickScaleDown 0s .5s linear forwards;
+
+      .modal-background {
+        animation: fadeOutColor 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+      }
+      .modal {
+        animation: roadRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+          forwards;
+      }
+    }
+  }
+
+  .modal-background {
+    background: rgba($cor1, 0.6);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .modal {
+    background: transparent;
+    padding: 0;
+    display: inline-block;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: inherit;
+    bottom: inherit;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transform-origin: top left;
+    z-index: 2;
+
+    h4 {
+      color: #fff;
+      font-size: 2em;
+      font-weight: 900;
+      margin-bottom: 0.25em;
+      padding: 0;
+      text-align: center;
+    }
+
+    p,
+    label {
+      color: #fff;
+      font-family: $fonte;
+      font-size: 1.275em;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    .botaoPadrao {
+      // // font-size: 28px;
+      // position: absolute;
+      // bottom: 30px;
+      // right: 30px;
+
+      // &.max {
+      //   width: 272px;
+      // }
+
+      &[disabled],
+      &[disabled]:hover {
+        background: #aaa;
+        color: #777;
+        opacity: 1;
+      }
+    }
+
+    // INTRO
+    .popupIntro {
+      background: rgba($cor5, 0.9);
+      border: 0;
+      border-radius: 35px;
+      margin: 0 auto;
+      padding: 40px;
+      width: 820px;
+      height: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%, -50%));
+    }
+  }
+
+  @media #{$bp-tablet} {
+    .botaoFechar {
+      top: 40px;
+      right: 40px;
+    }
+
+    .modal {
+      p,
+      label {
+        font-size: 21px;
+      }
+
+      .botaoPadrao {
+        font-size: 26px;
+        display: block;
+        margin: 0 auto;
+        bottom: 50px;
+        right: 50px;
+      }
+
+      // INTRO
+      .popupIntro {
+        width: 96%;
+        height: 80%;
+
+        .conteudoIntro {
+          justify-content: center;
+          flex-direction: column;
+
+          .introLeft {
+            width: 100%;
+          }
+          .introRight {
+            width: 60%;
+          }
+
+          .botaoVideo {
+            margin: 20px auto 0;
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$bp-phone} {
+    .modal {
+      overflow: auto;
+
+      .botaoFechar {
+        top: 15px;
+        right: 15px;
+      }
+
+      .botaoPadrao {
+        font-size: 21px;
+        position: relative;
+        bottom: inherit;
+        right: inherit;
+        margin: 15px 0 0;
+        padding: 6px 12px 4px;
+        float: right;
+
+        width: auto;
+      }
+
+      h2 {
+        font-size: 2em;
+        margin: 0 0 10px;
+      }
+
+      p,
+      label {
+        font-size: 1.2em;
+      }
+
+      p {
+        margin-bottom: 20px;
+      }
+
+      // INTRO
+      .popupIntro {
+        width: 94%;
+        padding: 25px 20px 15px;
+        min-height: 94%;
+        border-radius: 12px;
+
+        .conteudoIntro {
+          height: calc(100% - 80px);
+          overflow: auto;
+          justify-content: flex-start;
+
+          h2 {
+            font-size: 26px;
+          }
+
+          p {
+            font-size: 16px;
+            margin-bottom: 10px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        .botaoPadrao {
+          position: absolute;
+          bottom: 20px;
+          right: 20px;
+          margin: 0;
+          font-size: 21px;
+          padding: 10px 30px 6px;
+        }
+      }
+    }
+  }
+}
