@@ -1,13 +1,52 @@
-// LOGO EINSTEIN / PADRAO
-.logoEinstein {
-  background: url("../images/logoSirio.svg") center no-repeat;
-  height: 45px;
-  width: 45px;
+header {
+  pointer-events: none;
+  background-color: transparent;
   position: absolute;
-  top: 5%;
-  left: 3%;
+  width: 100%;
+  height: 180px;
+  z-index: 10;
+
+  .logoEinstein {
+    background: url("../images/logoSirio.svg") center no-repeat;
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    top: 5%;
+    left: 3%;
+  }
+
+  .logoPuzzle {
+    background: url("../images/logoPrincipal.svg") top center no-repeat;
+    position: absolute;
+    top: 0;
+
+    height: 180px;
+    width: 50%;
+    max-width: 40%;
+    top: 0;
+    left: 50%;
+
+    @include transform(translateX(-50%));
+
+    &.logoAnima {
+      @include animation(
+        logoAnima 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+      );
+    }
+
+    &.removeAnima {
+      @include animation(
+        removeAnima 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+      );
+    }
+
+    // @media #{$bp-ultrabook} {
+    //   // left: 11%;
+    // }
+  }
 }
 
+// PADRAO
 .telaPadrao {
   background: #fff url("../images/BG_Entrada.png") center no-repeat;
   background-size: cover;
@@ -40,38 +79,6 @@
     width: 12%;
   }
 
-  .logoPuzzleG {
-    background: url("../images/logoPrincipal.svg") top -1px center no-repeat;
-    // background-size: 100%;
-    height: 180px;
-    width: 50%;
-    max-width: 40%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-
-    @include transform(translateX(-50%));
-  }
-
-  .logoPuzzle {
-    background: url("../images/logoPrincipal.svg") center no-repeat;
-    height: 85px;
-    width: 310px;
-    position: absolute;
-    top: 0;
-    left: 18%;
-
-    @media #{$bp-ultrabook} {
-      left: 11%;
-    }
-  }
-}
-
-// CAPA
-.capaContent {
-  position: absolute;
-  z-index: 5;
-
   .blocoCapa {
     background-color: rgba($cor5, 0.8);
     border-radius: 30px;
@@ -90,21 +97,19 @@
         color: #fff;
       }
     }
-  }
 
-  @media (max-width: 1400px) {
-    padding-top: 90px;
+    &.reDo {
+      // display: grid;
+      @include transform(scaleY(0.005) scaleX(0));
+      @include animation(
+        unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+      );
+    }
   }
-}
-
-// INTRODUÇÃO
-.introContent {
-  position: relative;
-  z-index: 4;
 
   .blocoIntro {
     background-color: rgba($cor5, 0.8);
-    display: grid;
+    display: none;
     grid-template-areas:
       "introLeft introRight"
       "introBottom introBottom";
@@ -115,12 +120,18 @@
     max-width: 1320px;
     width: 80%;
     padding: 3em 5em;
+    position: absolute;
     z-index: 10;
 
-    // position: absolute;
-    // left: 50%;
-    // top: 50%;
-    // @include transform(translate(-50%, -50%));
+    &.unfoldIn {
+      display: grid;
+    }
+
+    &.unfoldOut {
+      display: grid;
+    }
+
+    @include transform(scaleY(0.005) scaleX(0));
 
     .introLeft {
       grid-area: introLeft;
@@ -147,33 +158,9 @@
     }
   }
 
-  @media (max-width: 1400px) {
-    padding-top: 90px;
-
-    .blocoIntro {
-      padding: 2em 3em;
-
-      .introLeft {
-        h3 {
-          font-size: 1.825em;
-        }
-
-        p {
-          font-size: 1.25em;
-        }
-      }
-    }
-  }
-}
-
-// FEEDBACK
-.feedContent {
-  position: relative;
-  z-index: 2;
-
   .blocoFeed {
     background-color: rgba($cor5, 0.8);
-    display: grid;
+    display: none;
     grid-template-areas:
       "feedLeft feedRight"
       "feedBottom feedBottom";
@@ -184,7 +171,18 @@
     max-width: 1140px;
     width: 80%;
     padding: 3em 5em;
+    position: absolute;
     z-index: 10;
+
+    &.unfoldIn {
+      display: grid;
+    }
+
+    &.unfoldOut {
+      display: grid;
+    }
+
+    @include transform(scaleY(0.005) scaleX(0));
 
     .feedLeft {
       grid-area: feedLeft;
@@ -212,6 +210,10 @@
     }
   }
 
+  &.abs {
+    position: absolute;
+  }
+
   @media (max-width: 1400px) {
     padding-top: 90px;
 
@@ -231,33 +233,44 @@
   }
 }
 
+.unfoldOut {
+  @include animation(
+    unfoldOut 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+  );
+}
+
+.unfoldIn {
+  @include animation(
+    unfoldIn 0.8s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+  );
+}
+
 // GAME
 .gameContent {
   background: url("../images/BG_Principal.png") bottom -80px center no-repeat;
-  // background-size: 100%;
-  display: flex;
+  display: none;
   align-items: center;
   min-height: 100%;
   width: 100%;
   position: relative;
+  opacity: 1;
   z-index: 3;
+
+  &.fadeIn {
+    display: flex;
+    opacity: 1;
+    @include transition(all 2s);
+  }
+
+  &.fadeOut {
+    display: flex;
+    opacity: 0;
+    @include transition(all 1s);
+  }
 
   @media (max-width: 1400px) {
     padding-top: 110px;
     background-position: bottom -200px center;
-  }
-
-  .logoPuzzle {
-    background: url("../images/logoPrincipal.svg") center no-repeat;
-    height: 85px;
-    width: 310px;
-    position: absolute;
-    top: 0;
-    left: 18%;
-
-    @media #{$bp-ultrabook} {
-      left: 11%;
-    }
   }
 
   .puzzleWrap {
@@ -267,6 +280,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 
     .puzzleBoard {
       // border: solid 1px black;
@@ -300,26 +314,26 @@
           }
 
           &.selected {
-            background-color: $cor5;
+            background-color: $cor10;
             color: #fff;
             outline: none;
           }
 
           &.found {
             color: #fff;
-            background-color: $cor5;
+            background-color: $cor10;
 
             &.selected {
-              background-color: $cor5;
+              background-color: $cor10;
             }
           }
 
           &.complete {
-            background-color: lighten($cor5, 18%);
+            background-color: lighten($cor10, 18%);
             pointer-events: none;
 
             &.found {
-              background-color: $cor5;
+              background-color: $cor10;
             }
           }
 
@@ -355,7 +369,7 @@
       align-items: center;
       padding: 15px 0;
       text-transform: uppercase;
-      width: 300px;
+      width: 320px;
 
       @include transition(all 0.3s);
 
@@ -369,9 +383,9 @@
 
         li {
           background-color: #fff;
-          border: solid 1px $cor5;
+          border: solid 1px $cor10;
           border-radius: 35px;
-          color: $cor4;
+          color: $cor10;
           font-family: $fonte;
           font-size: 1em;
           font-weight: 700;
@@ -388,7 +402,7 @@
           }
 
           &.wordFound {
-            background: $cor5 url("../images/icoCheck.svg") center left 6px
+            background: $cor10 url("../images/icoCheck.svg") center left 6px
               no-repeat;
             background-size: auto 85%;
             color: #fff;
@@ -405,10 +419,32 @@
       width: 300px;
       margin: 0 0 5em 0;
 
+      img {
+        &.animaPulo {
+          @include animation(Jump 1s ease forwards);
+        }
+
+        &.someBlur {
+          @include animation(BlurImage 0.5s 0.2s ease forwards);
+        }
+        &.voltaBlur {
+          @include animation(BackImage 0.5s ease forwards);
+        }
+      }
+
       @media #{$bp-minDesktop} {
         align-self: start;
         justify-self: center;
       }
+    }
+
+    .btnAvancar {
+      position: absolute;
+      right: 45px;
+      bottom: 15px;
+      font-size: 1.35em;
+      padding: 12px 30px;
+      display: none;
     }
 
     @media (max-width: 1400px) {

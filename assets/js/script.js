@@ -1,20 +1,14 @@
 // SHUFFLE
 Array.prototype.shuffleArray = function () { return this.sort(() => Math.random() - 0.5); }
 
-let words = ['COMPETÊNCIA', 'PROTAGONISMO', 'DIÁLOGOS', 'DESENVOLVIMENTO', 'PROATIVIDADE'];
+// QUEBRA ARRAY
+const quebraArray = (array, size) =>
+  array.reduce((acc, _, i) => {
+    if (i % size === 0) acc.push(array.slice(i, i + size))
+    return acc
+}, [])
 
-// start a word find game
-let gamePuzzle = wordfindgame.create(
-	words,
-	'.puzzleBoard',
-	'.puzzleWords',
-	{
-		height: 15,
-		width: 15,
-		fillBlanks: true
-	});
-
-
+///////
 const wordsJson = [
 	{
 		id: 1,
@@ -116,22 +110,37 @@ const wordsJson = [
 		nome: "CONQUISTA",
 		descricao: "Conquistas são feitos notáveis obtidos ao atingir metas ou superar desafios, representando marcos significativos que evidenciam o sucesso em várias áreas da vida, tanto individual quanto coletivamente."
 	},
-]
+];
 
-const arraySorted = wordsJson.shuffleArray();
-console.log(arraySorted)
+let arraySorted,
+	arrayBreak,
+	gamePuzzle,
+	persCount,
+	imgCount,
+	flagFinalizaGame = false,
+	wordsAtTime = [],
+	countArray = 0;
+
+arraySorted = wordsJson.shuffleArray();
+arrayBreak = quebraArray(arraySorted, 5);
+
+/////////////
+
+function isEven(number) { return Math.floor(number / 2) * 2 === number; }
 
 // MODAL
 const popIntro = $('.popupIntro');
 popIntro.find('button').on('click', escondeModal);
 
 function chamaModal(pop, effect, item) {
-	$('#modalWord').find('.popLearning').hide();
+	$('.puzzleImage').find('img').removeClass('voltaBlur');
+
+	// $('#modalWord').find('.popLearning').hide();
 	if (pop != '') $('#modalWord').find('.' + pop).show();
 
 	if (effect == '') effect = 'aparece';
 	if (item) {
-		console.log(item)
+		// console.log(item)
 		$.each(wordsJson, function(i, val) {
 			if (item == val.nome) {
 				popIntro.find('h4').html(val.nome);
@@ -142,5 +151,111 @@ function chamaModal(pop, effect, item) {
 	$('#modalWord').removeAttr('class').removeAttr('style').addClass(effect);
 }
 function escondeModal() {
+	changeImage();
+	if (flagFinalizaGame) finalizaGame();
 	$('#modalWord').addClass('out').delay(600).hide(100);
 }
+
+//// TRANSIÇÕES
+$('.btnComeca').on('click', function() {
+	$('header').find('.logoPuzzle').addClass('logoAnima');
+	$('.blocoCapa').addClass('unfoldOut');
+	$('.blocoIntro').addClass('unfoldIn');
+});
+
+$('.btnIniciar').on('click', function() {
+	$('.blocoIntro').removeClass('unfoldIn reDo').addClass('unfoldOut');
+	
+	createWord();
+
+	$('.telaPadrao').addClass('abs');
+	$('.gameContent').addClass('fadeIn').removeClass('hidden');
+});
+
+$('.btnAvancar').on('click', function() {
+	$('.blocoFeed').addClass('unfoldIn');
+	$('.gameContent').addClass('fadeOut');
+
+	setTimeout(() => {
+		$('.gameContent').removeClass('fadeOut').removeClass('fadeIn');
+		$('.telaPadrao').removeClass('abs');
+	}, 1000)
+});
+
+$('.btnReiniciar').on('click', function() {
+	if (countArray == 4) {
+		arraySorted = [];
+		arrayBreak = [];
+		arraySorted = wordsJson.shuffleArray();
+		arrayBreak = quebraArray(arraySorted, 5);
+		countArray = 0;
+	}
+	
+	$('header').find('.logoPuzzle').addClass('removeAnima');
+	$('.blocoCapa').removeClass('unfoldOut').addClass('reDo');
+	$('.blocoFeed').removeClass('unfoldIn').addClass('unfoldOut');
+
+	setTimeout(() => {
+		$('header').find('.logoPuzzle').removeClass('logoAnima').removeClass('removeAnima');
+		$('.blocoCapa').removeClass('unfoldOut reDo');
+		$('.blocoIntro').removeClass('unfoldOut');
+		$('.blocoFeed').removeClass('unfoldOut');
+	}, 1000)
+});
+
+function createWord() {
+	wordsAtTime = [];
+	$('.puzzleWords').empty();
+	if (isEven(countArray)) 
+		persCount = 'P1' 
+	else 
+		persCount = 'P2';
+
+	$('.puzzleImage').find('img').attr('src', 'images/' + persCount + '_1.png');
+	$('.btnAvancar').removeClass('show');
+
+	$.each(arrayBreak[countArray], function(i, v){
+		wordsAtTime.push(v.nome);
+	})
+	gamePuzzle = wordfindgame.create(
+		wordsAtTime,
+		'.puzzleBoard',
+		'.puzzleWords',
+		{
+			height: 15,
+			width: 15,
+			fillBlanks: true,
+			orientations : ['horizontal','vertical','diagonal']
+		}
+	)
+	countArray++;
+}
+function finalizaGame() {
+	$('.btnAvancar').addClass('show');
+	flagFinalizaGame = false;
+}
+
+
+let changeImage = function() {
+	$('.puzzleImage').find('img').addClass('someBlur');
+
+	setTimeout(() => { 
+		$('.puzzleImage').find('img').attr('src', 'images/' + persCount + '_' + imgCount + '.png');
+		$('.puzzleImage').find('img').removeClass('someBlur').addClass('voltaBlur');
+	}, 700)
+}
+
+
+
+// let counter = 1;
+// $('.btnNote').on('click', function() {
+// 	if (counter < 6) {
+// 		counter++;
+// 		$('.puzzleImage').find('img').addClass('animaPulo');
+		
+// 		setTimeout(() => { 
+// 			$('.puzzleImage').find('img').attr('src', 'images/' + persCount + '_' + counter + '.png');
+// 			$('.puzzleImage').find('img').removeClass('animaPulo');
+// 		}, 400)
+// 	}
+// });

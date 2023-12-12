@@ -1,5 +1,6 @@
 @keyframes unfoldIn {
   0% {
+    position: relative;
     transform: scaleY(0.005) scaleX(0);
   }
   50% {
@@ -7,6 +8,7 @@
   }
   100% {
     transform: scaleY(1) scaleX(1);
+    position: relative;
   }
 }
 
@@ -19,6 +21,7 @@
   }
   100% {
     transform: scaleY(0.005) scaleX(0);
+    position: absolute;
   }
 }
 
@@ -273,6 +276,31 @@
   }
 }
 
+@keyframes logoAnima {
+  0% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  100% {
+    left: 18%;
+    height: 85px;
+    width: 310px;
+    transform: translateX(0) scaleX(1);
+  }
+}
+
+@keyframes removeAnima {
+  0% {
+    left: 18%;
+    height: 85px;
+    width: 310px;
+    transform: translateX(0) scaleX(1);
+  }
+
+  100% {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
 @keyframes sketchIn {
   0% {
     stroke-dashoffset: 778;
@@ -403,5 +431,83 @@
   }
   100% {
     @include transform(translate(0, 0));
+  }
+}
+
+@keyframes Jump {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(1.1, 0.9) translateY(10px);
+  }
+  30% {
+    transform: scale(0.9, 1.1) translateY(-100px) translateX(20px);
+  }
+  50% {
+    transform: scale(1, 1) translateY(-60px) translateX(90px);
+  }
+  100% {
+    transform: scale(1, 1) translateY(-60px) translateX(90px);
+  }
+}
+
+@keyframes BlurImage {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1, 1) translateX(0);
+  }
+  20% {
+    filter: blur(1px);
+    transform: scale(1, 1) translateX(10px);
+  }
+  40% {
+    filter: blur(3px);
+    transform: scale(1, 1) translateX(-10px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(5px);
+    transform: scale(1, 1) translateX(10px);
+  }
+  80% {
+    filter: blur(5px);
+    transform: scale(1, 1) translateX(-10px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(1, 1) translateX(0);
+  }
+}
+
+@keyframes BackImage {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(1, 1) translateX(0);
+  }
+  20% {
+    filter: blur(5px);
+    transform: scale(1, 1) translateX(10px);
+  }
+  40% {
+    filter: blur(5px);
+    transform: scale(1, 1) translateX(-10px);
+  }
+  60% {
+    opacity: 0;
+    filter: blur(3px);
+    transform: scale(1, 1) translateX(10px);
+  }
+  80% {
+    filter: blur(3px);
+    transform: scale(1, 1) translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1, 1) translateX(0);
   }
 }
