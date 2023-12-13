@@ -152,45 +152,15 @@ MODAL
   }
 
   @media #{$bp-tablet} {
-    .botaoFechar {
-      top: 40px;
-      right: 40px;
-    }
-
     .modal {
       p,
       label {
         font-size: 21px;
       }
 
-      .botaoPadrao {
-        font-size: 26px;
-        display: block;
-        margin: 0 auto;
-        bottom: 50px;
-        right: 50px;
-      }
-
       // INTRO
       .popupIntro {
-        width: 96%;
-        height: 80%;
-
-        .conteudoIntro {
-          justify-content: center;
-          flex-direction: column;
-
-          .introLeft {
-            width: 100%;
-          }
-          .introRight {
-            width: 60%;
-          }
-
-          .botaoVideo {
-            margin: 20px auto 0;
-          }
-        }
+        width: 94%;
       }
     }
   }

@@ -40,9 +40,13 @@ header {
       );
     }
 
-    // @media #{$bp-ultrabook} {
-    //   // left: 11%;
-    // }
+    @media #{$bp-tablet} {
+      width: 70%;
+      max-width: 70%;
+
+      left: 18%;
+      @include transform(translateX(0%) !important);
+    }
   }
 }
 
@@ -229,6 +233,47 @@ header {
           font-size: 1.25em;
         }
       }
+    }
+  }
+
+  @media #{$bp-tablet} {
+    .blocoCapa {
+      width: 90%;
+    }
+
+    .blocoIntro {
+      grid-template-areas:
+        "introLeft "
+        "introBottom";
+      grid-template-columns: 100%;
+      gap: 0.75em;
+      width: 90%;
+    }
+
+    .blocoFeed {
+      grid-template-areas:
+        "feedLeft feedLeft"
+        "feedRight feedBottom";
+      grid-template-columns: 50% 50%;
+      align-items: center;
+      gap: 0.75em;
+      width: 90%;
+
+      .feedRight {
+        img {
+          width: 80%;
+        }
+      }
+    }
+  }
+
+  @media #{$bp-phone} {
+    .blocoCapa {
+      padding: 1.5em 2.5em;
+    }
+
+    .blocoIntro {
+      padding: 1.5em !important;
     }
   }
 }
@@ -488,6 +533,19 @@ header {
         background-size: 100%;
         height: 320px;
         width: 220px;
+      }
+    }
+
+    @media #{$bp-tablet} {
+      // left: 11%;
+      display: grid;
+      grid-template-areas:
+        "puzzle puzzle "
+        "palavras imagens ";
+      justify-content: space-around;
+
+      .puzzleBoard {
+        justify-self: center;
       }
     }
   }
