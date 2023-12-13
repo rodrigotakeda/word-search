@@ -169,25 +169,8 @@ MODAL
     .modal {
       overflow: auto;
 
-      .botaoFechar {
-        top: 15px;
-        right: 15px;
-      }
-
-      .botaoPadrao {
-        font-size: 21px;
-        position: relative;
-        bottom: inherit;
-        right: inherit;
-        margin: 15px 0 0;
-        padding: 6px 12px 4px;
-        float: right;
-
-        width: auto;
-      }
-
-      h2 {
-        font-size: 2em;
+      h4 {
+        font-size: 1.6em;
         margin: 0 0 10px;
       }
 
@@ -203,37 +186,6 @@ MODAL
       // INTRO
       .popupIntro {
         width: 94%;
-        padding: 25px 20px 15px;
-        min-height: 94%;
-        border-radius: 12px;
-
-        .conteudoIntro {
-          height: calc(100% - 80px);
-          overflow: auto;
-          justify-content: flex-start;
-
-          h2 {
-            font-size: 26px;
-          }
-
-          p {
-            font-size: 16px;
-            margin-bottom: 10px;
-
-            &:last-child {
-              margin-bottom: 0;
-            }
-          }
-        }
-
-        .botaoPadrao {
-          position: absolute;
-          bottom: 20px;
-          right: 20px;
-          margin: 0;
-          font-size: 21px;
-          padding: 10px 30px 6px;
-        }
       }
     }
   }

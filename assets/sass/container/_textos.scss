@@ -144,7 +144,12 @@ ol {
 }
 
 @media #{$bp-phone} {
+  h3 {
+    font-size: 1.6em;
+  }
+
   p {
-    font-size: 1.25em;
+    font-size: 1em;
+    margin: 0 0 15px;
   }
 }
