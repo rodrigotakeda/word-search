@@ -117,6 +117,7 @@ let arraySorted,
 	gamePuzzle,
 	persCount,
 	imgCount,
+	posicaoDicas = [],
 	flagFinalizaGame = false,
 	wordsAtTime = [],
 	countArray = 0;
@@ -203,6 +204,8 @@ $('.btnReiniciar').on('click', function() {
 	}, 1000)
 });
 
+createWord();
+
 function createWord() {
 	wordsAtTime = [];
 	$('.puzzleWords').empty();
@@ -213,6 +216,7 @@ function createWord() {
 
 	$('.puzzleImage').find('img').attr('src', 'images/' + persCount + '_1.png');
 	$('.btnAvancar').removeClass('show');
+	$('.btnEmbaralhar').removeClass('hidden');
 
 	$.each(arrayBreak[countArray], function(i, v){
 		wordsAtTime.push(v.nome);
@@ -232,9 +236,9 @@ function createWord() {
 }
 function finalizaGame() {
 	$('.btnAvancar').addClass('show');
+	$('.btnEmbaralhar').addClass('hidden');
 	flagFinalizaGame = false;
 }
-
 
 let changeImage = function() {
 	$('.puzzleImage').find('img').addClass('someBlur');
@@ -245,17 +249,37 @@ let changeImage = function() {
 	}, 700)
 }
 
+$('.btnDica').on('click', function() {
+	// console.log(wordsAtTime);
+	// console.log(posicaoDicas[0]);
 
+	let wordAxis = posicaoDicas[0][1];
+	$('.puzzleBoard').find('.puzzleSquare').each((i, v) => {
+		_item = $(v);
 
-// let counter = 1;
-// $('.btnNote').on('click', function() {
-// 	if (counter < 6) {
-// 		counter++;
-// 		$('.puzzleImage').find('img').addClass('animaPulo');
-		
-// 		setTimeout(() => { 
-// 			$('.puzzleImage').find('img').attr('src', 'images/' + persCount + '_' + counter + '.png');
-// 			$('.puzzleImage').find('img').removeClass('animaPulo');
-// 		}, 400)
-// 	}
-// });
+		for (i = 0; i < wordAxis.length; i++) {
+			if (_item.attr('y') == wordAxis[i][0] && _item.attr('x') == wordAxis[i][1]) { _item.addClass('solved'); }
+		}
+	})
+
+	// yAxis = firstPos[0];
+	// xAxis = firstPos[1];
+	// let secondPos = posicaoDicas[0][1][1];
+	// yAxis2 = secondPos[0];
+	// xAxis2 = secondPos[1];
+
+	// console.log(yAxis, yAxis2);
+	// console.log(xAxis, xAxis2);
+
+	// $('.puzzleBoard').find('.puzzleSquare').each((i, v) => {
+	// 	_item = $(v);
+
+	// 	if(_item.attr('y') == yAxis && _item.attr('x') == xAxis) { _item.addClass('solved'); }
+	// 	if(_item.attr('y') == yAxis2 && _item.attr('x') == xAxis2) { _item.addClass('solved'); }
+	// })
+});
+
+$('.btnEmbaralhar').on('click', function() {
+	countArray--;
+	createWord();
+});
