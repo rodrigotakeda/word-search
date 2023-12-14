@@ -82,6 +82,10 @@ footer {
   }
 
   @media #{$bp-phone} {
+    &.mobileRelative {
+      position: relative;
+    }
+
     width: 50%;
     left: 25%;
     height: 40px;
@@ -353,8 +357,8 @@ footer {
 // GAME
 .gameContent {
   background: url("../images/BG_Principal.png") bottom -80px center no-repeat;
-  // display: none;
-  display: flex;
+  display: none;
+  // display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -403,6 +407,7 @@ footer {
       width: auto;
 
       .linha {
+        background-color: #fff;
         width: 100%;
         margin: 0 auto;
 
@@ -430,6 +435,11 @@ footer {
             background-color: $cor10;
             color: #fff;
             outline: none;
+          }
+
+          &.blink {
+            @include animation(pisca 1s linear infinite);
+            // @include transition(none);
           }
 
           &.found {
@@ -698,6 +708,7 @@ footer {
         width: 150px;
       }
 
+      .btnEmbaralhar,
       .btnAvancar {
         position: relative;
         margin: 1em auto;
