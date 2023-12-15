@@ -271,6 +271,8 @@ $('.btnDica').on('click', function() {
 		let isMatch =  $('.puzzleWords .word:contains(' + randomWord + ')').eq(0).index();
 		if ($('.puzzleWords').find('.word').eq(isMatch).hasClass('wordFound')) return;
 
+		$('.gameContent').addClass('modalGame');
+
 		let wordAxis = v[1];
 		$('.puzzleBoard').find('.puzzleSquare').each((j, item) => {
 			_item = $(item);
@@ -281,7 +283,10 @@ $('.btnDica').on('click', function() {
 			}
 		})
 
-		setTimeout(() => { $('.blink').removeClass('blink'); }, 3000);
+		setTimeout(() => { 
+			$('.blink').removeClass('blink'); 
+			$('.gameContent').removeClass('modalGame');
+		}, 3000);
 
 		dicaPalavra = true;
 	})

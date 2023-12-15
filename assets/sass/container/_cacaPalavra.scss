@@ -371,6 +371,19 @@ footer {
   opacity: 1;
   z-index: 3;
 
+  &::before {
+    @include animation(
+      fadeOutColor 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+    );
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+
   &.fadeIn {
     display: flex;
     opacity: 1;
@@ -381,6 +394,22 @@ footer {
     display: flex;
     opacity: 0;
     @include transition(all 1s);
+  }
+
+  &.modalGame {
+    // z-index: 11;
+
+    &::before {
+      @include animation(
+        fadeInColor 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+      );
+      z-index: 11;
+    }
+
+    .puzzleBoard {
+      position: relative;
+      z-index: 12;
+    }
   }
 
   @media (max-width: 1400px) {
