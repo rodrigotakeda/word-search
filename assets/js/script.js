@@ -115,6 +115,7 @@ const wordsJson = [
 let arraySorted,
 	arrayBreak,
 	gamePuzzle,
+	casasDica = 2,
 	persCount,
 	imgCount,
 	posicaoDicas = [],
@@ -192,10 +193,6 @@ $('.btnReiniciar').on('click', function() {
 		arraySorted = wordsJson.shuffleArray();
 		arrayBreak = quebraArray(arraySorted, 5);
 		countArray = 0;
-
-		
-		
-		
 	}
 	
 	$('.telaPadrao').removeClass('abs');
@@ -278,7 +275,8 @@ $('.btnDica').on('click', function() {
 		$('.puzzleBoard').find('.puzzleSquare').each((j, item) => {
 			_item = $(item);
 
-			for (k = 0; k < 2; k++) {
+			// casasDica = wordAxis.length;
+			for (k = 0; k < casasDica; k++) {
 				if (_item.attr('y') == wordAxis[k][0] && _item.attr('x') == wordAxis[k][1]) { _item.addClass('blink'); }
 			}
 		})
