@@ -514,12 +514,12 @@
 
 @keyframes pisca {
   0% {
-    background-color: rgba($cor1, 0);
+    background-color: rgba($cor10, 0);
   }
   50% {
-    background-color: rgba($cor1, 0.2);
+    background-color: rgba($cor10, 0.5);
   }
   100% {
-    background-color: rgba($cor1, 0);
+    background-color: rgba($cor10, 0);
   }
 }

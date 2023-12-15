@@ -170,7 +170,6 @@ $('.btnIniciar').on('click', function() {
 	createWord();
 
 	$('.telaPadrao').addClass('abs');
-	$('footer').addClass('mobileRelative');
 	$('.gameContent').addClass('fadeIn').removeClass('hidden');
 });
 
@@ -181,23 +180,30 @@ $('.btnAvancar').on('click', function() {
 	setTimeout(() => {
 		$('.gameContent').removeClass('fadeOut').removeClass('fadeIn');
 		$('.telaPadrao').removeClass('abs');
-		$('footer').removeClass('mobileRelative');
 	}, 1000)
 });
 
 $('.btnReiniciar').on('click', function() {
-	if (countArray == 4) {
+	reloadGame = $(this).data('reload');
+
+	if (countArray == 4 || reloadGame) {
 		arraySorted = [];
 		arrayBreak = [];
 		arraySorted = wordsJson.shuffleArray();
 		arrayBreak = quebraArray(arraySorted, 5);
 		countArray = 0;
+
+		
+		
+		
 	}
 	
+	$('.telaPadrao').removeClass('abs');
 	$('header').find('.logoPuzzle').addClass('removeAnima');
 	$('.blocoCapa').removeClass('unfoldOut').addClass('reDo');
 	$('.blocoFeed').removeClass('unfoldIn').addClass('unfoldOut');
-
+	$('.gameContent').removeClass('fadeIn').addClass('hidden');
+	
 	setTimeout(() => {
 		$('header').find('.logoPuzzle').removeClass('logoAnima').removeClass('removeAnima');
 		$('.blocoCapa').removeClass('unfoldOut reDo');
@@ -210,6 +216,8 @@ $('.btnReiniciar').on('click', function() {
 
 function createWord() {
 	wordsAtTime = [];
+	posicaoDicas = [];
+
 	$('.puzzleWords').empty();
 	if (isEven(countArray)) 
 		persCount = 'P1' 
@@ -218,7 +226,9 @@ function createWord() {
 
 	$('.puzzleImage').find('img').attr('src', 'images/' + persCount + '_1.png');
 	$('.btnAvancar').removeClass('show');
-	$('.btnEmbaralhar').removeClass('hidden');
+	// $('.btnEmbaralhar').removeClass('hidden');
+	$('.botoesGame').find('.btnReiniciar').removeClass('hidden');
+	$('.botoesGame').find('.btnDica').removeClass('hidden');
 
 	$.each(arrayBreak[countArray], function(i, v){
 		wordsAtTime.push(v.nome);
@@ -238,7 +248,8 @@ function createWord() {
 }
 function finalizaGame() {
 	$('.btnAvancar').addClass('show');
-	$('.btnEmbaralhar').addClass('hidden');
+	$('.botoesGame').find('.btnReiniciar').addClass('hidden');
+	$('.botoesGame').find('.btnDica').addClass('hidden');
 	flagFinalizaGame = false;
 }
 
@@ -253,7 +264,7 @@ let changeImage = function() {
 
 $('.btnDica').on('click', function() {
 	let dicaPalavra = false;
-	console.log(posicaoDicas)
+	// console.log(posicaoDicas)
 
 	$.each(posicaoDicas, (i, v) => {
 		if (dicaPalavra) return;
@@ -267,12 +278,12 @@ $('.btnDica').on('click', function() {
 		$('.puzzleBoard').find('.puzzleSquare').each((j, item) => {
 			_item = $(item);
 
-			for (k = 0; k < wordAxis.length; k++) {
+			for (k = 0; k < 2; k++) {
 				if (_item.attr('y') == wordAxis[k][0] && _item.attr('x') == wordAxis[k][1]) { _item.addClass('blink'); }
 			}
 		})
 
-		setTimeout(() => { $('.blink').removeClass('blink'); }, 6000);
+		setTimeout(() => { $('.blink').removeClass('blink'); }, 3000);
 
 		dicaPalavra = true;
 	})
@@ -280,6 +291,5 @@ $('.btnDica').on('click', function() {
 
 $('.btnEmbaralhar').on('click', function() {
 	countArray--;
-	posicaoDicas = [];
 	createWord();
 });
